@@ -106,31 +106,6 @@
               - 要完成功能的话，需要去修改fs/romfs/super.c， 实现对挂载的文件系统进行控制， 比如读加密， 隐藏文件等。
               - 然后mount -o loop TEST.IMG mnt, 然后可以到mnt下check
 
-- Hbase相关
-     - 首先为什么需要hbase (总结起来就是：Hbase支持动态增加列，数据非常稀疏的时候可以节约空间， 可以存储多版本数据， 方便水平扩展，而且海量数据按列查询比较快。)
-     - 半结构化或非结构化数据 对于数据结构字段不够确定或杂乱无章很难按一个概念去进行抽取的数据适合用HBase。以上面的例子为例，当业务发展需要存储author的email，phone，address信息时RDBMS需要停机维护，而HBase支持动态增加.
-     - 记录非常稀疏 RDBMS的行有多少列是固定的，为null的列浪费了存储空间。而如上文提到的，HBase为null的Column不会被存储，这样既节省了空间又提高了读性能。
-     - 多版本数据  如上文提到的根据Row key和Column key定位到的Value可以有任意数量的版本值，因此对于需要存储变动历史记录的数据，用HBase就非常方便了。比如上例中的author的Address是会变动的，业务上一般只需要最新的值，但有时可能需要查询到历史值。
-     - 超大数据量  当数据量越来越大，RDBMS数据库撑不住了，就出现了读写分离策略，通过一个Master专门负责写操作，多个Slave负责读操作，服务器成本倍增。随着压力增加，Master撑不住了，这时就要分库了，把关联不大的数据分开部署，一些join查询不能用了，需要借助中间层。随着数据量的进一步增加，一个表的记录越来越大，查询就变得很慢，于是又得搞分表，比如按ID取模分成多个表以减少单个表的记录数。经历过这些事的人都知道过程是多么的折腾。采用HBase就简单了，只需要加机器即可，HBase会自动水平切分扩展，跟Hadoop的无缝集成保障了其数据可靠性（HDFS）和海量数据分析的高性能（MapReduce）
-     
-     - Zookeeper(root表) -> root表保存metaData -> metadata保存Region信息
-     - 读写过程：client向region server提交写请求
-           - region server找到目标region
-           - region检查数据是否与schema一致
-           - 如果客户端没有指定版本，则获取当前系统时间作为数据版本
-           - 将更新写入WAL log
-           - 将更新写入Memstore
-           - 判断Memstore的是否需要flush为Store文件。
-     - 定期执行分裂与合并， 分裂比较简单，现在MemStore里面划分，之后等到compaction的时候在生成Hstore
-     - Compaction主要分为Dump以及过多的HStore进行合并
-
-- 大数据分析的一些常用指标
-      - 几种存储模式： Hash/B树/LSM-tree
-      - 单机事务 (ACID)
-      - 分布式系统 异常/一致性 
-      - 衡量指标: 性能/系统吞吐以及响应时间， 可用性, 一致性， 可扩展性
-      - CAP/BASE BASE是对CAP中的C/A的平衡结果，即使无法做到强一致性，然而可以采用适当方式达到最终一致性
-
 ## 分布式相关
 
 - Hbase相关
