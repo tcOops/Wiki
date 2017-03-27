@@ -1,0 +1,120 @@
+- 最基本的问题--Object $\bigstar$$\bigstar$
+    - interface不继承object
+    - equals() 一般都需要被override
+    - finalize() JVM中有个守护进程，在销毁该对象时会自动调用
+    - notify() | notifyAll() | wait() 这些方法与lock的关系比较紧密，可以在lock中使用
+    - toString() 很常用，一般都需要被override
+    - Clone() 默认浅拷贝， 重写它需要implements Cloneable接口
+    - getClass() 调用该实例的运行时类
+    - hashCode 注意重写equal时， 需要重写hashCode()（定义自己觉得相等的模式， 在这种模式下确保两者hashCode值一样)
+
+- Java中需要提供复制一个对象的方法，需要implements Cloneable之后再重写clone, 而需要序列化的话则需要implements Serializable， 这两个接口都是空的。。
+    - Object中的clone执行的时候使用了RTTI（run-time  type  identification）的机制,动态得找到目前正在调用clone方法的那个reference，根据它的大小申请内存空间，然后进行bitwise的复制，将该对象的内存空间完全复制到新的空间中去，从而达到shallowcopy的目的。 
+  所以调用super.clone() 得到的是当前调用类的副本，而不是父类的副本。根本没有必用调用this.clone();
+    - 要让实例调用clone方法就需要让此类实现Cloneable接口，API里面还有句话是：如果在没有实现 Cloneable 接口的实例上调用 Object 的 clone 方法，则会导致抛出 CloneNotSupportedException 异常，这便是“合法”的含义。 但请注意，Cloneable接口只是个标签接口，不含任何需要实现的方法，就像Serializable接口一样。
+
+- try, catch, finally
+    - finally一定会执行，无论有没有异常出现，或者try或者catch中有return, finally也仍然会执行。
+    - 如果在finally之前出现了return, 那么finally是在return 后面的表达式运算之后执行的，也就是说会将表达式先算出来缓存，然后再去执行finally, 而finally中所做的一切操作都对这个返回值没有影响。 如果在finally中有return, 那么程序会提前退出，而不会返回缓存中的值。
+
+- Java默认构造函数的问题
+    - 如果定义了有参的构造函数(此时就不会有默认的空参的空构造函数)，还是要习惯带上一个空参的构造函数。因为如果有一个类来继承这个类，如果在子类的构造函数中不显示的使用super.(XXX)的话，会默认使用this.()来调用父类的空构造函数
+
+- Java重写equal的时候，必须要重写hashCode方法，这是必须的。 因为考虑到hashCode这个函数，对于HashMap这样的类比较的时候是会出错的(先hash, 严格按照=进行比较，所以两个对象一致才能ok, 这样会将两个相同的对象，算出不同的hash值)$\bigstar$
+
+- 一定要Deep Copy! $\bigstar$$\bigstar$
+    - Object的clone方法很粗暴，判断了是否继承了Cloneable(this instance Cloneable), 所以重写clone方法时，先implements Cloneable, 然后可以先调用super.clone()将整体copy下来， 之后值类型可以不管， 引用类型需要new一个实例消除影响.
+
+- 关于java修饰符
+
+    - 权限 
+
+      - 类中成员与变量public | protected | private | default
+      ： 注意默认情况下(即什么都不加)，default要比protect弱一点, protect继承类可以访问，而default不可以
+       protect准确来说是package之外不能用
+
+      - 类本身: public | default
+      ： 在java中经常忽略类的访问权限问题， 这里如果不加public修饰就是默认的权限, 即在同一个包内可以访问.
+   
+    - 修饰符: abstract | final | static
+
+    - static这个东西很神奇，比如
+      
+       - 你要知道一个static方法要么在一个顶部类，要么在一个static的内部类里面创建, 然而原因说得过去: 
+          因为静态方法啊，变量啊这种类型的东西实际是jvm钦定了一块静态区域,这东西是不能依赖于其他的
+          资源的，然而非static的内部方法，在外部类加载的时候不会加载内部类，这时候就不能调用static
+          方法了！ 记住: static方法在类加载的时候就在内存了！
+
+       - 那么当然在static方法里面也不能调用非静态类啦， 而且只能使用方法外部的静态变量。 这是为了去掉 
+        static方法与外界环境的依赖。
+
+- Java中的string不可变
+    - 这点类似于Python中的str, 所谓的immutable. 
+    - Java中有所谓的primitive类型， 有所谓的引用类型， 值类型。 基础类型都是值类型，在栈上分配，存取速度很快，生命周期后自动销毁， 而引用类型， 通过计数由jvm统一管理。 这一点与python很相似。
+
+- Java构造函数
+     - 1、子类的构造过程中必须调用其基类的构造方法。
+     - 2、子类可以在自己的构造方法中使用super(argument_list）调用基类的构造方法。
+         - 2.1、使用this(argument_list)调用本类的另外构造方法
+         - 2.2、如果调用super，必须写在子类构造方法的第一行。
+     - 3、如果子类的构造方法中没有显示的调用基类的构造方法，则系统默认调用基类的无参数构造方法。
+     - 4、如果子类构造方法中既没有显示调用基类构造方法，而基类又没有无参数的构造方法，则编译出错。
+
+- Java静态方法不具有多态性
+    - 父类中的静态方法，在之类中继承重写(override)， 用super a = new sub(); a.foo(), 如果foo是个静态方法， 那依然调用a中的
+    - 构造函数并不具有多态性，它们实际上是static方法，只不过该static声明是隐式的。因此，构造函数不能够被override是因为静态函数不能被继承
+
+
+- List / Set / Map
+    - List/Set/Map都是接口， 其中List/Set接口继承自Collection接口。
+    - ArrayList(动态数组,非同步的) & LinkedList(链表实现,插入，删除快， 访问慢)
+    - HashSet(hash实现, 速度快) & TreeSet(红黑树实现, 实现了SortedSet接口, 有序)
+    - HashMap & LinkedHashMap(类似于HashMap，然而迭代时的k-v一般是按插入顺序，因为链表实现，所以迭代访问时反而更快) & TreeMap(RB-Tree)
+    - 注意map下的hashMap与hashTable的区别, hashTable线程安全，加了synchronized关键字, hashMap需要自己加锁进行同步，可以参考[这里](http://www.cnblogs.com/skywang12345/p/3311126.html#a2)
+
+- 多线程的写法问题
+      - 忽视了一个很基础但很重要的问题 [Thread::run 与 Runnable的区别](http://blog.csdn.net/wwww1988600/article/details/7309070)
+      - 结论: 尽量用Runnable写多线程比较好，方便共享变量。
+
+- 关于一些最基本的问题的考虑
+      - java思维问题。 从C++转Java有个很明显的思维弱点，过于考虑Programmer在Coding中对代码的优化，而忽略了JVM的作用，同时部分放弃了设计模式这样的工程哲学。 这样做很不对。 要知道Java的优势在于他的虚拟机的强大。我们使用Java的原因就在于他可以替我们去考虑内存管理的各个繁琐细节，而让我们有更多的精力去控制复杂工程中的一些设计模式上的问题。 所以，不应像写C++那样过多在意效率，我们选择相信JVM的能力，而应该考虑比如: 如何更好的使用OOP特性，某些时候为了描述精确，或者为了代码的debug或者移植性，需要写一些在C++中看起来没那么必要的代码。
+      - Java中简单的设计原则：KISS 需要的就写，不需要的别乱写。 比如Private这些关键字，需要用Private的时候(某个方法只想被内部内部使用，不想被外部看到)，不要用public。
+
+- Java内部类的一些问题
+ 
+
+- Callable
+
+- Java全局共享变量的方案
+    - 目前看到比较多的是全局static， 或者声明一个对象，导入到之后需要使用的地方中。 或者声明一个类似Workflow/Schedule/ScheduleMaster 这样超级类的对象，然后全局共享使用这个对象下面的方法。
+
+- Java多线程中的同步互斥问题
+     - 几个关键字的具体含义: 几种Lock: Lock(接口)/ReetrantLock(实现了Lock的类)/ReadWriteLock(接口)/ && CyclicBarrier 可以参考[这里](http://www.tuicool.com/articles/NnQjyq)
+     - Sychronized可以看作是Java的内嵌锁，lock更加原生，两者在语义与内容上相近，但是因为lock更加原生，所以更加灵活。
+     - 将Lock与Condition(Java线程通信)组合，可以组合不同效果的数据结构, 比如ArrayBlockingQueue这样的阻塞队列，
+     - 对于java的队列来说，并发条件下需要保证线程安全，对于阻塞队列(blockingQueue)来说，采用锁机制，对非阻塞队列比如ConcurrentLinkedQueue来说，采用循环CAS方式(Compare and Swap), 乐观锁采用CAS。
+     - 如果synchronized加在一个类的普通方法上，那么相当于synchronized(this)。
+     - 如果synchronized加载一个类的静态方法上，那么相当于synchronized(Class对象)。      
+
+- Java中的阻塞队列(BlockingQueue)
+     - ArrayBlockingQueue
+     - DelayQueue
+
+- Super关键字
+     - 调用父类的方法super.()调用父类的构造函数(不显式调用父类构造函数的话默认会执行) super.XXX()
+
+- Java单例模式
+     - 当系统中某个对象仅存在一个的时候， 那么就考虑使用单例模式，比如ConnectionPool这个对象
+
+- Java内存模型
+     - [参考](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
+     - 类比多CPU共享内存，每个CPU还有一个Cache来做独立缓存，当然存在缓存一致性的问题
+     - 所有的变量都存储在主内存中，每条线程还有自己的工作内存
+
+- ConcurrentHashMap总结
+     - [详解](https://my.oschina.net/hosee/blog/675884)
+
+- Java中for与foreach的比较
+     - foreach只能循环访问，不能循环修改
+     - foreach能做的for都可以做， for可以做的foreach不一定可以做
+     - 注意Integer与int的自动装箱拆箱过程

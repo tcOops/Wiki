@@ -1,0 +1,104 @@
+扔个[官方题解](http://blog.jisuanke.com/?p=229)
+
+---
+
+- A:很容易想到朴素解法，枚举$d(u,v,w)$中的$v$点，用朴素Floyd进行~~有选择~~的DP，时间复杂度显然$O(n^4)$
+
+- B:贪心， 
+```
+int main(){
+    int T;
+    scanf("%d",&T);
+    int a, b, c;
+    
+    while(T--) {
+        scanf("%d %d %d", &a, &b, &c);
+        int ans = 0;
+        while(((a > 2 && b > 1) || (a > 1 && b > 2)) && c) {
+            if(a > b) {
+                --c;
+                b = b - 2, a = a - 3;
+            }
+            else {
+                --c;
+                b = b - 3, a = a - 2;
+            }
+            ans = ans + 2;
+        }
+        
+        if(a && b && c) {
+            --a, --b, --c, ++ans;
+        }
+        
+        while(a >= 3 && b >= 3) {
+            a = a - 3;
+            b = b - 3;
+            ans = ans + 2;
+        }
+        
+        if((b > 1 && a != 0) || (a > 1 && b != 0)) {
+            ++ans;
+        }
+        
+        cout << ans << endl;
+    }
+    return 0;
+}
+```
+
+- C: 待做
+- D: 待做
+- E: 考虑到一个重要性质: $x \equiv f(x) \pmod{3}$, 因为 $f(a) \equiv f(b) \equiv f(c) \pmod{3}$, 所以 $(a+b+c)mod3 = 0$,反过来如果$n \pmod 3 = 0$, 显然可以将$n$均分成3份进行解构造。
+
+```
+int dig[N], ans[N];
+int cnt;
+
+void solve(int len, int div) {
+    int r = 0, cn = 0;
+    for(int i = 0; i < len; ++i) {
+        r = r * 10 + dig[i];
+        ans[cn++] = r / div;
+        r = r % div;
+    }
+
+    int i;
+    for(i = 0; ans[i] == 0; ++i);
+    
+    for(int j = i; j < cn; ++j) {
+        printf("%d", ans[j]);
+    }
+    printf(" ");
+    for(int j = i; j < cn; ++j) {
+        printf("%d", ans[j]);
+    }
+    printf(" ");
+    for(int j = i; j < cn; ++j) {
+        printf("%d", ans[j]);
+    }
+    cout << endl;
+}
+
+int main() {
+    char num[10000];
+    scanf("%s", num);
+    
+    int sum = 0;
+    cnt = 0;
+    for(int i = 0; num[i]; ++i) {
+        dig[cnt++] = num[i] - '0';
+        sum += dig[i];
+    }
+    
+    if(sum % 3 != 0) {
+        printf("-1\n");
+    }
+    else if(sum == 0) {
+        printf("0\n");
+    }
+    else {
+        solve(cnt, 3);
+    }
+    return 0;
+}
+```

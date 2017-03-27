@@ -1,0 +1,8 @@
+ Title
+ :   MapReduce: Simplified Data Processing On Large Cluster (OSDI 2004)
+
+
+
+Conclusion
+ :  
+     MapReduce是google的一个用来处理大规模数据的编程模型

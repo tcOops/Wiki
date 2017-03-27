@@ -1,0 +1,17 @@
+<font style="color:red">重要命令</font>
+
+- :%s/p/q/g  （将p替换为q, 譬如 %s/a/\_a/g 将a->_a
+
+- :w !sudo tee % (非root权限下关闭vim文件时候需要强行使用root
+
+- :vsp命令(横屏打开一个新文件 :vsp a.txt) 窗口之间切换可使用 ctrl + W + (l/h)
+
+- N cmd 重复命令N次
+
+- yy copy当前行 p 粘贴
+
+- saveas </path/to/file>
+
+- :bn :bp (next/prior文件之间切换)
+
+- o 当前行后面插入一个新行 O(big o)在当前行前面插入一个新行

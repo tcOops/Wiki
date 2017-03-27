@@ -1,0 +1,38 @@
+- [MAC上忘记root初始密码解决方案](http://www.zuimoban.com/jiaocheng/mysql/2548.html)
+    - MAC上重启Mysql的路径/usr/local/mysql/support-files/mysql.server [-start][-stop]
+
+- Mysql新建一个用户,并且对其赋权限的操作:
+    - create database workflowdb default character set utf8
+    - create user 'workflow'@127.0.0.1 identified by '123456'
+    - grant all on workflowdb.* to workflow@127.0.0.1
+
+- Mysql导出表结构(不导出数据):
+    - mysqldump --no-data --database workflow_db > workflowdb.sql
+
+- Mac Os EI capitan(v.10.11) 存在SIP(System Integrity Protection)这种安全模式，产生所谓的rootless效应-即使你是root权限也无法访问文件夹， 此时我们需要：
+    - Reboot Mac，press Command+R to enter Recovery Mode
+    - Type "csrutil disable" in terminal and enter
+    - Reboot Mac
+
+- [二进制的秘密](http://www.jianshu.com/p/0e0005cc0928)
+
+- [尾递归](http://www.cnblogs.com/JeffreyZhao/archive/2009/03/26/tail-recursion-and-continuation.html)
+
+- [函数式编程语言](http://coolshell.cn/articles/10822.html)
+
+- [$Latex$数学公式](http://www.mohu.org/info/symbols/symbols.htm) ($\int_{0}^{\frac{\pi}{4}}$ $\prod_\epsilon$)
+
+- [各种画图工具啊?] (论文图啊, Presentation图啊， 算法随手搞个图啊， 还有blog装逼图啊， viso/mspaint/python(matplotlib)/js(d3    etc.),总之要跟小兔子学习一个啊
+
+- [Django框架的运行流程](http://xianglong.me/article/django-request-work-flow/), 别忽视uwsgi + python函数调用啊！
+- [Django + uwsgi + nginx](http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html) uwsgi是wsgi(python标准)的一个实现
+
+- [apt原理](http://blog.csdn.net/buguyiqie/article/details/4948661)
+
+- [Git相关原理](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
+
+- [C语言的内存模型](http://blog.csdn.net/tigerjibo/article/details/7423728)
+
+- [Haskell工具链](https://zhuanlan.zhihu.com/p/21798264)
+
+- [B树相关](http://blog.csdn.net/v_JULY_v/article/details/6530142/)

@@ -1,0 +1,94 @@
+- 知识点
+	- <font style="color:red"> 基础篇：</font>
+        - 基础知识
+        	- 基本数据结构 & C++11 STL(set, map, queue, priority_queue, vector)
+        	- 排序(选择，插入，冒泡，归并，shell，桶排，--快排）[链接](http://127.0.0.1:5001/fengbunny/sortProblems)<font style="color:red">   W50</font><font style="color:green">ch2、ch6、ch7、ch8</font>
+        	- 二分(二分答案，二分上下界)[链接](http://127.0.0.1:5001/fengbunny/binarySearchProblems)
+        	- 经典贪心
+    	- 暴力与优化
+    		- 简单枚举
+    		- 全排列
+    		- two points
+
+    	- 动态规划 [链接](http://127.0.0.1:5001/fengbunny/dynamicProgrammingProblems)
+			- 递推 & 记忆化搜索(棋盘分割
+			- 区间DP
+			- 背包问题(01，完全，多重
+			- DAG上的DP
+          
+    	- 搜索
+        	- 递归与回溯(八皇后非递归版本）
+        	- 弱剪枝(soduku, sticks）
+
+        - 字符串处理
+        	- 暴力求解字符串匹配(LCP等等)
+        	- KMP(模板串，匹配串)
+        	- Trie
+        	- Hash
+
+        - 树
+        	- 二叉树的三种遍历方式
+            - BST
+        	- 无根树转有根树之后的各种操作，求树的高度等
+        	- LCA(O(m+n)解法)
+
+        - 图论
+        	- BFS， DFS图搜索
+        	- 并查集
+        	- 最短路算法(dijkstra, bellmanford, floyd)
+        	- 最小生成树(Prim, Kruskal)
+
+    
+    - <font style="color:red"> 提高篇： </font>
+    	- 常用技巧
+    		- 二分求解 最大最小值问题
+    		- 三分法求解凸函数的极值
+    		- 归并 | 树状数组 求逆序对
+    		- 单调栈 与 单调队列 的使用
+    		- 枚举的技巧(枚举第一行etc)
+    		- 离散化
+
+    	- 字符串 [链接](http://127.0.0.1:5001/fengbunny/stringProblems)
+    		- manacher线性求最长回文
+    		- KMP的深入
+    		- 后缀数组(optional)
+
+    	- 数据结构
+    		- 树状数组
+    		- 平方分割
+    		- 基本线段树
+    		- RMQ问题的几种解法(ST, 分块，线段树)
+
+    	- 动态规划 [链接](http://127.0.0.1:5001/fengbunny/dynamicProgrammingProblems)
+    		- 树上的DP（树上的背包
+    		- 状态压缩DP
+    		- DP的优化(单调队列优化 矩阵快速幂优化 线段树或树状数组优化) (optional)
+    		- 棋盘覆盖问题的几种解法
+
+    	- 图论
+    		- LCA的tarjan解法
+    		- 强连通分量(SCC)的tarjan解法 & 正反dfs
+    		- dijkstra的堆优化  SPFA(bellmanford的队列优化)
+    		- 最基本的网络流(最大流的EK算法 最小割)
+    		- 二分图(dfs染色判 | hungary算法 | 最大流解法)
+    		- dicnic求最大流(分层图 & 当前弧优化)
+
+    	- 数学题
+    		- GCD
+    		- 扩展欧几里得(求ax+by=c的x)
+    		- 常见的筛法(埃氏O(n*loglog(n)) 线性筛)
+    		- 欧拉函数
+    		- 欧拉定理与费马小定理
+    		- 简单同余方程 ax = 1(mod MOD), 逆模的概念， 模运算技巧
+
+    	- 计算几何
+    		- 最基本的几何操作
+    		- 凸包(旋转卡壳) (optional)
+
+
+
+- <font style="color:red"> Attention  </font>
+    - 注意养成分析时间复杂度的好习惯 (常规分析方法， 主定理，  均摊分析
+    - 时间复杂度优先，空间复杂度次之
+    - 注意培养工程实践中的算法分析能力
+ 

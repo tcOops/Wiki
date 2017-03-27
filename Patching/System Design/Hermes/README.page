@@ -1,0 +1,10 @@
+- Task In Transwarp
+
+- Target: Read the upd log from logminer in Oracle, and update Hbase after handling.
+
+- Requirements:
+    - Performance: High throught and Low latency, in 1S when deal with 1w+ QPS
+    - Fault Tolerance: Deal with the data Missing event and Make sure it is high available.
+
+- Architecture:
+    - Oracle(logMiner) --JDBC--> Hermes --JDBC--> Hbase

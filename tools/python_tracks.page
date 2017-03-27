@@ -1,0 +1,9 @@
+<font style="color:pink; font-size:20px"> 关于Python的一些事情:</font>
+
+- python的编码问题,巴别塔，　常见的python编码问题在于:
+      - 文件本身的编码: ***.py文件开头默默加上: #-*- coding -*-, 表示该文件的里面所有的文字包括中文都是utf8编码
+      - decode/encode 比如一个文本的编码为gbk, 那么先读入一个字符先decode成unicode, 然后再编码为指定的编码
+      - 因为解码是python自动进行的，我们没有指明解码方式，python 就会使用sys.defaultencoding 指明的方式来解码。 很多情况下sys.defaultencoding是anscii,
+         如果不是这个类型就会出错。 所以要么在py文件开头加入:sys.setdefaultencoding('utf-8'), 要么就直接指定编码的方式, s.decode('uft-8')
+
+- python的版本问题，犹记得上次在MAC上折腾python-setuptools来安装airflow[hive]包，　最后只要重新brew install　python之后就迎刃而解

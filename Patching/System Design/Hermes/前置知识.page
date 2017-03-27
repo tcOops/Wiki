@@ -1,0 +1,16 @@
+- Oracle相关
+     - redo/undo的联系
+     - 数据字典
+     - oracle redo log
+
+- Hbase相关
+     - 可以参考[这里](http://127.0.0.1:5001/Patching/System Design/Hadoop/Hbase)
+
+- Java/JDBC相关
+     - Java操作Hbase
+
+- LogMiner的基本配置问题
+     - [Index](http://www.cnblogs.com/shishanyuan/p/3140440.html)
+     - [Logminer分析日志](http://chenxy.blog.51cto.com/729966/170340/)
+     - [RedoLog的几种状态](http://blog.sina.com.cn/s/blog_81306d180102vwkr.html)
+

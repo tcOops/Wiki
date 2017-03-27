@@ -1,0 +1,1 @@
+- A: 简单逻辑题， string a = string b ? -1 : max_len(a, b);

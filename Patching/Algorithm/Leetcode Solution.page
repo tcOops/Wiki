@@ -1,0 +1,9 @@
+<font style="color:red"> Solution for Leetcode in 2016-2017 Winter, By RejudgeX in C++ </font>
+
+
+- 21.Merge Two Sorted Lists(Easy)
+      - Solution: 链表合并题，需要注意的是单链表是否有头结点(题目中没有头结点), 虚拟一个头节点s, 最后返回s->next
+
+- 257.Binary Tree Paths(Easy)
+      - Solution: 求一Binary Tree的根到leaf的所有路径List, dfs一下树就好。
+

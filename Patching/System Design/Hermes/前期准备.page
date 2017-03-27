@@ -1,0 +1,55 @@
+- [可能的数据采集方式? 类似sqoop || 类似flume(distribute)](http://www.tuicool.com/articles/FN7fam)
+
+- 数据库的Log模式? append-only?(涉及到处理的问题)
+
+- hermes需要做成single Node?
+
+- [UnderStanding LogMiner](http://www.idevelopment.info/data/Oracle/DBA_tips/LogMiner/LOGMINER_13.shtml)
+
+- [Oracle Logminer Offical](http://docs.oracle.com/cd/B28359_01/server.111/b28319/logminer.htm#i1016328)
+
+- Archivelog模式
+
+- 如何pref? Hbase的pref/logMiner的Pref
+
+- 考察Single/Cluster状态下的方案
+      - 对于Single
+      - 对于Cluster，调研kafka是否能够提升关键性能(找performance的bottleneck很关键)
+
+- Logminer的简单使用流程:
+      - Logminer这东西主要用来分析日志，日志目前来看分为: 在线 & Archive(归档)
+      - Logminer主要由两部分组成，视图 & 过程， 视图用来将日志文件(binary)可视化，之后再调用过程来进行解析
+      - 流程: 
+           - 创建数据字典文件dictionary.ora
+              - 1 CONN LOGMINER/LOGMINER@orcl AS SYSDBA
+              - 2 EXECUTE dbms_logmnr_d.build(dictionary_filename => 'dictionary.ora', dictionary_location =>'D:\oracle\oradata\practice\LOGMNR');
+
+           - 装载日志文件，将其转化为数据字典
+               - 1 BEGIN
+               - 2 dbms_logmnr.add_logfile(logfilename=>'D:\oracle\oradata\practice\REDO03.LOG',options=>dbms_logmnr.NEW);
+               - 3 END;
+               - 4 /
+            
+           - 开始解析数据字典，结果保存在视图V$logmnr_contents中
+               - EXECUTE dbms_logmnr.start_logmnr(dictfilename=>'D:\oracle\oradata\practice\LOGMNR\dictionary.ora');
+
+           - 去视图中获取结果
+               - 1 SELECT sql_redo, sql_undo, seg_owner
+               - 2 FROM v$logmnr_contents
+               - 3 WHERE seg_name='AAAAA'
+               - 4 AND seg_owner='LOGMINER';
+
+- 对logminer测试的总结
+      - 在shell端测试了一下logminer的使用，总结出一些特性
+      - dbms_logmnr_d.build()方法创建一个dictionary.ora的数据字典， 此时只是空字典，需要在后面加载log文件才会有内容
+      - 字典的内容加载方式有两种， 一种是new, 一种是Add_file， 对于new在创建完字典之后首次加载log时使用， 之后可以选择使用new来覆盖，或者使用Addfile，在后面追加。 注意使用addfile追加之后，不需要重新start_logmnr就可以追踪变化
+      - new加上一个log之后必须要重新start_logmnr，否则会报错， 之后视图可以实时捕捉redo_log的变化
+      - end_logmnr之后，Memory中的视图肯定挂掉了， 然而dictionary.ora这时候也没用了... 运行dbms_logmnr.start_logmnr会报错，必须要重新add_logfile才能start， end_logmnr之前的dictionary.ora已经没用啦。。
+
+- 查看当前每个redoLog的SCN范围:select GROUP#,sequence#,STATUS,FIRST_CHANGE#,to_char(FIRST_TIME, 'yyyy/mm/dd:hh24:mi:ss') time from V$log;
+- 查看整个DB的最新SCN: select current_scn from v$database;
+- Check当前的v\$logmnr_logs: select db_name, thread_sqn, filename from v\$logmnr_logs
+
+- Hbase的常见问题
+      - 没有设置HBASE_HOME这个环境变量
+      - 遇到Zookeeper Retry 4的时候可能需要重启一下shell， 同时stop-hbase再start-hbase, 注意即使是单机版的hbase也是需要zookeeper的

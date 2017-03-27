@@ -1,0 +1,21 @@
+- 关于Hbase的设计，主要参考了Google的Bigtable这篇论文
+- 有关Hbase比较好的解释：
+      - [详解了Hbase的大概结构](http://www.ixirong.com/2015/07/16/learn-about-hbase/?utm_source=tuicool&utm_medium=referral)
+      - [同上](http://www.ibm.com/developerworks/cn/analytics/library/ba-cn-bigdata-hbase/index.html)
+      - [同上](https://yq.aliyun.com/articles/37355)
+      - [bigtable的理解](http://jimbojw.com/wiki/index.php?title=Understanding_Hbase_and_BigTable)
+      - [这篇主要对比了Bigtable与Hbase](http://blog.csdn.net/kanghua/article/details/2919766)
+
+- 一些关键点分析：
+    - Hbase的列式存储？
+        - 普通的RDBMS都是所谓的行式存储，即每一个Row同时存储在一起。后来由于业务场景的需要，RDBMS几个范式反而成为快速操作的阻碍。 Hbase采用了列式存储：Hbase的结构是 Row-key -> Column Family(CF) -> Qualifier(Column) -> Version，即Hbase是一个多版本的存储系统，从行Key到列簇，再到指定的某一个列，然后还要指定版本就可以定位到一个数据单元，称为cell.
+        - Hbase就将单个CF物理上存在一起，注意是物理上，逻辑上仍然按照Row-key的顺序存储。
+        - 每一个CF可能包含的数据量很大，可能要分多个文件存储，这里的文件称为Hfile保存在HDFS上。 而且对于每个CF保存的时候，都是按照Row-key的字典序进行有序排序，这样也可以方便Row-Scan.
+        - 这样存储的好处在于，当你只需要操作数据表的某几列的时候(这样的操作很多)，我们只需要取出其中的CF的数据再筛选，而不需要将整个表所有的数据都遍历一遍。
+        - Hbase支持单行事务，在对某个Row做任何操作的时候， 都会加锁
+        - 在此基础上可以YY一下如何在Hbase上做join?
+
+- Hbase的架构
+    - Hbase的两个基本单位， 逻辑单位Region, 物理单位HFile. 逻辑上依然按照Row-Key的顺序存储，当文件存储大小到达某个临界值，保存当前文件为一个Region，并且开辟一个新的Region。 并且对于某个Region只能完整存储在某个RegionServer上。 而实际上HBase物理上是按照CF来存储的， 最小存储单位是HFile. 对于某个CF而言，会按照固定大小分为一个一个的Store来存储。 而对于每一个store而言，又可以分成memStore + StoreFile, 这个StoreFile就是HFile轻度包装。 
+    - 所以实际上对于某个Region而言， 是由某个Table的多个CF下某一段连续的Store Combine之后的一个结果。 而且对于所有的CF的Store而言，都是按照Row-Key进行排序的。
+    - ![Hbase Store File](http://127.0.0.1:5001/static/img/storeFile.png)

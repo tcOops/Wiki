@@ -1,0 +1,35 @@
+- <font style="color:Green"> 理论 </font>
+    - <font style="color:red"> 一致性协议 </font>
+        - 2PC
+        - 3PC
+        - Paxos (Lamport Paper1,2)
+        - Raft()
+    - <font style="color:red"> 计算框架理论 </font>
+        - MapReduce (Google Paper)
+        - Spark (UCB Paper)
+    - <font style="color:red"> 分布式系统 </font>
+        - GFS (google Paper)
+        - Hadoop (Apache Nutch)
+    - <font style="color:red"> 分布式锁服务 </font>
+        - Chubby (google Paper)
+
+
+
+- <font style="color:Green"> 工具 </font>
+    - Linux Base Knowledge
+    - Go语言
+    - Maven构建工具
+    - SBT构建工具
+    - RPC (Thrift)
+    - DataBase
+
+
+
+- <font style="color:Green"> 框架 </font>
+    - Hadoop系统
+    - Hive
+    - Hbase
+    - MapReduce / Spark
+    -
+
+- <font style="color:Green"> Project </font>

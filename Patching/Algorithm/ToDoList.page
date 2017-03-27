@@ -1,0 +1,62 @@
+- [Latex数学公式编辑！！！！！！](https://zh.wikibooks.org/zh-cn/LaTeX/数学公式)
+
+
+- Hihocoder 题目泛做LaTeX
+
+- ?? [数位DP+状态压缩](http://acm.hdu.edu.cn/showproblem.php?pid=4352)
+
+- [SJTU线段树专题](http://acm.sjtu.edu.cn/OnlineJudge/contest/425)
+
+- Hihocoder 数位DP(等式填空)
+
+- Polya计数法（cyx论文
+
+- [Tree DP合集](http://blog.csdn.net/liuqiyao_01/article/details/8477730)
+
+- POJ3093(经典背包优化, 逆序
+
+- HDOJ 1542 (矩形面积并)(分别用离散化 和 线段树来求)
+
+- POJ次短路
+
+- [Kuangbin 图论+网络流基本题](http://www.cnblogs.com/kuangbin/p/3228371.html)
+
+- 做下[数位DP合集](http://blog.csdn.net/niuox/article/details/9864199)
+
+- Hihocoder offer练习赛3
+
+- BZOJ 2839 (容斥原理)
+
+- [DP水](http://codeforces.com/contest/712/problem/D)
+
+- 玲珑杯Round2.5题解
+    - A (组合数学 | 容斥原理)  
+    - B (很nice的DP题， 用到lowbit(i)来减小DP转移时候的枚举量)， 关于这个性质感觉很常用， 有点类似于树状数组， 将二叉树的左右两个方向标记为0和1，然后惊讶的发现找第i个前面一个实际上是找最后两个点分叉的位置， 实际上是最后一个1出现的位置的上面那个点是两个点的LCA。
+
+- ~~CF 713C~~:　等价转化(严格上升转化为非严格上升，而非严格上升的该问题是一个经典问题)之后的LIS, DP时候需要每层保存上一层的min值，复杂度可降到$O(N^2)$ (AC)
+
+- ~~2016大连网赛1009~~: 补图上求最短路，因为补图的边权值都为1, 可直接用bfs搞定，维护一个set, 保存当前没有扩展的点, 对queue中的当前点进行扩展
+
+- ~~2016青岛网赛1011~~: 最短路上的最小割,经典题
+
+- ~~2016沈阳网赛1003:~~ 经典的组合数学题，这题我一定要写总结！
+
+- 2016沈阳网赛1004: 强行找关系转化为矩阵快速幂求单项, 之后求$x^{y} mod (s+1)$,　考虑到y比较大, 根据欧拉定理进行转化: $a^{\varphi(x)} \equiv 1 \pmod x$, 所以$x^{y} mod (s+1)$ -> $x^{y mod \varphi(s+1) + \varphi(s+1)} mod (s+1)$
+
+- 大连网赛1001　非常经典的题目，burnside定理得到：$F(n) = 1/n * \sum_{i=1}^{n}(f(gcd(i, n)))$, 这是一个非常经典的问题, 可以转化为: $F(n) = ​1/n * \sum_{d∣n}​​f(d)\varphi(​n/d​​)$(训练指南有证明，按n的因子分类), 时间复杂度为$O(log(n) * sqrt(n))$
+
+- ISPC 2012 Contructor(非常有趣的位运算*）
+
+- [关于线分割平面的递推](http://www.cnblogs.com/luosuo10/p/5259676.html)
+
+- 紫书的8-11章的所有习题, 写个Solution
+
+- [四边形优化DP](http://blog.csdn.net/lotus_land/article/details/18865437)
+
+- [单调栈啦](http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1215) 统计以a[i]分别为子区间最大值以及最小值的长度，然后计算贡献，这样就变成一个单调栈解法， 假设以a[i]为最大值的区间为[l,r]，那么贡献的区间个数为$(i-l+1)*(r-i+1)$个
+
+- ~~[按边统计, 树的重心贪心构造](http://www.51nod.com/contest/problem.html#!problemId=1737)~~考虑每一条边被统计进答案几次。
+若断开这条边后树形成大小为s1、s2的两个联通块则这条边最多被统计$min(s1，s2)$次。构造方案的做法为：找出树的重心，让所有n/2条路径都经过重心即可（只要保证删去重心后任意同一联通块中的两点不构成路径即可，因为是重心，所以这是很好构造的).这样构造出来的配对方案满足了每条边都没被统计$min(s1，s2)$次，所以这道题只要求出断开每条边后两个联通块的大小即可。
+
+- SJTU1543->Lucas的妙用？ 明确Lucas定理在求大的组合数取模时候很有用啊， 定理如下$\binom{n}{m} \equiv \prod_{0}^{k}\binom{n_i}{m_i} \pmod p$ 其中$m_i, n_i$是m,n关于p的分解, k为分解之后的位数。
+   对于1543这道题目，基于这样一个前提:$\binom{n}{m} = 0$ 如果$n < m$, 那么:考虑反例求[0, n]中满足$\binom{n}{i} \neq 0 \pmod 3$的情况，我们先将n先基于3进行3进制分解，那么显然对于分解后n的任意一位，我们如果构造一个新的数x，在该位上大于这个数，那么$\binom{n}{x} = 0$。 所以要想$\binom{n}{x} \neq 0 \pmod 3$，我们构造x的时候，对于x的任意一个3进制位，都要小于等于n对应的位的数值，才能满足条件。 这样可以构造的数的个数为 $\prod_{0}^{k}(n_i + 1)$个。 所以答案为$(n+1)-\prod_{0}^{k}(n_i + 1)$个。

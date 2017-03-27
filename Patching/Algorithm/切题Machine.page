@@ -1,0 +1,18 @@
+- papaya
+
+- C++ string转int, int转string就别瞎搞啦, string转int string a -> char b[10], b = a.c_str() -> c = atoi(b)
+
+- int转string,  int a -> char b[10], sprintf(b, "%d", a) -> c = b;
+
+- map<string, vector<string>>::iteration it, it->first, it->second
+
+- mp[string] = vector<string>(0) 初始化一个空的vector的猥琐写法
+
+- STL元素自定义:
+    - 对priority_queue自定义排序: 结构体里面重载<, 或者自定义cmp结构体重载()，然后priority_queue < int, vector <int>, cmp> pq; 
+    - 对map自定义排序， 可以先搞个结构体cmp, 里面重载一下()， 之后 map<string, string, cmp> mp; 
+    - 对C++::set自定义排序，类似于优先队列，可以在结构体里面重载<, 或者自定义cmp结构体重载()，然后定义set<int, cmp> st;
+
+- Unorder_map内部采用hashTable实现，所以读写复杂度比较接近$O(1)$, 然而map采用RB-Tree,所以读写复杂度还是$O(lg(n))$
+
+- bitset的用法

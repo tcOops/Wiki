@@ -1,0 +1,42 @@
+- 1. 谨慎使用字符，尤其1与l, O与0的使用
+
+- 52. 推荐String直接赋值
+     - String str = "abc"; 这种方式推荐
+     - 否则用new的话， String str = new String("abc"), 这种方式可能会导致系统中出现大量的String对象
+     - 因为Java中有个字符串常量池， 每次创建一个字符串的时候，都会先去池中看看有没有字面值相等的字符串， 有的话就返回该对象引用就行
+     - 然而使用new创建的时候是不会去check常量池的，而是直接创建一个对象，也不会把这个对象放在常量池中， 所以a == b就会为false
+     - JVM的垃圾回收不会对该常量池做回收处理
+
+-   
+
+
+- 54. String, StringBuffer, StringBuilder
+     - String本身不可修改, str.substring(0)不会创建新对象，只会从字符串池中返回str的引用
+     - StringBuffer是可变的， sb.append("a");
+     - StringBuilder与StringBuffer很类似， 但是StringBuffer是线程安全的(有sychronized)
+
+- 120. 不要乱用 thread.stop()函数
+     - depricated
+     - 过于violence, 不够graceful
+     - Stop破坏代码的原子性， 比如Synchronized保护某个代码段，强行stop，就会破坏数据的完整性与一致性
+     - 如果真的需要stop一个线程，自己写标志位判断, 或者使用interrupt方法， thread.interrupt()并不会停止一个线程，它会将isInterrupted()中断标志位置为true, 然后我们就可以在thread.run()里面用 while(!isInterrupted())...
+     
+- 121. 关于线程的优先级：
+     - 没你想的那么simple, 并不是说rank1 就一定比 rank2的被调用可能性高，只是从概率上讲是高那么一点点。 所以rank2的线程是有可能是在rank1的线程之前执行的
+     - 所以建议使用优先级常量， 只设定3个级别的优先级： MIN_PRIORITY, NORM_PRIORITY, MAX_PRIORITY, 推荐1, 5, 10
+
+- 122. 线程异常处理器
+     - 在Runnable的start()中套一层， Thread t = new Thread(this); t.setUncaughtExceptionHandler(new TcpServerExceptionHandler()); t.start();   这里TcpServerExceptionHandler 实现了 Thread.UncaughtExceptionHandler接口
+     - 
+
+- 123. Volatile关键字
+
+- 127. Lock与Synchronized的区别
+     - Lock：显式锁， synchronized：内部锁。 两者似乎在代码块的并发性与内存的语义上一样。
+     - Lock必须放在一个try...finally块中， 保证即使出现Exception也能正常释放锁
+     - Lock是对象级别的锁， 而sychronized是类级别的锁, 所以如果同时开启了多个lock的实例，不会互斥啊！
+     - Lock支持细粒度， 无阻塞(等待状态)，可实现公平锁，代码级， sychronized是  阻塞锁，只能是不公平锁，JVM级
+     - 
+
+
+

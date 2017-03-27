@@ -1,0 +1,122 @@
+- 优先级比较高的事情(2017/2/25)
+     - Hermes抓紧， 可考虑参考开源项目
+     - Google三篇论文的加深理解(重要细节必须搞清楚
+     - Hbase的使用细节，设计精髓
+     - 赶紧测试使用一发spark, 学学scala
+     - Storm | Flink | Kafka相关经验累积
+     - March做完leetcode的Hard & Medium
+
+- 近期可能要打的比赛?(Upd online)
+     - ~~CF Round#400 (THU 22:35)~~
+     - ~~BC Round#92 (SAT 19:00)~~
+     - 玲珑杯Round11 (SAT 12:00)
+     - Hihocoder Offer收割8 (SUN 12:00)
+     - Leetcode Contest 22(SUN 10:30)
+     
+     - 华为软件精英挑战赛?
+     - GCJ 2017(March 7开始注册)
+     - APAC 2017
+
+- 2017/2/15
+     - Hbase的结构深入理解，包括HRegion的create/upd/delete等
+     - Java学习笔记(Lock, condition等)
+     - build single node Hbase && Java->HBase
+     - 研究Zookeeper
+     - Herems代码Review && 搭一个简单framework
+     - LeetCode at least 2 solutions
+
+- 2017/2/16
+     - Transwarp Working Day
+     - 配置好hbase之后，使用Java API简单进行了Hbase的操作
+     - 接着之前的Job, 简单测试了logminer, 理了一下logminer的流程
+     - 学习java的151个建议-第二小节， 考虑hermes的整体结构， 定了初步的整体框架
+
+- 2017/2/17
+     - Transwarp Working Day
+     - 研究logminer的参数配置，以及在线日志与Archive日志的细节问题
+     - 写了部分关于Logminer的连接code
+     - 南站找箱子
+
+- 2017/2/18
+     - 玲珑杯Round10(一道看起来像组合数学的DP， 以及一道看起来像数位DP，然而大概分析发现情况很少，可以先dfs预处理之后二分即可的煞笔题)， 以及两道leetcode
+     - 做题感觉很一般, 趁机总结了之前的一波代码
+     - Java151个建议-第三小节
+
+- 2017/2/19
+     - 周末, 下午写好了oracle的logminer查询，但未进行测试
+     - Hihocoder Challenge 27只做了A
+     - Java151个建议-第四小节
+
+- 2017/2/20
+     - Transwarp Working Day
+     - 调试了logminer部分，可完成整个流程，进行简单的插入查询
+     - 构思Hermes的架构，企图在数据库连接池上 | Producer(Sql Container) | Consumer(Sync Task) 上进行优化， 需要考虑多线程的使用技巧，以及一些关键参数的设置
+     - 发现logminer的视图模式，是加载一次log之后，会在内存里持续监视数据的实时变化，所以在加载好字典start_logmnr之后，只要进行查询语句就可以跟踪最新的数据集，考虑在查询方式上做优化。
+     - 箱子say goodbye, 跟交警喝茶聊天...
+     - 研究java的线程池|多线程|Lock/Synchronized技术， 感觉自己很弱鸡
+
+- 2017/2/21
+     - 做了tiger19/20, 好弱啊， 20-B是个二分，想了很久竟没想到正解(过于执着想更好的方案，忽略了二分这样稍微暴力的方法，虽然中途想过二分，因为觉得很难DP之类，但是想错了二分的细节，所以得到了错误的复杂度...) 19-B(Ctrl-C ctrl-V)不知道怎么搞(找不到最优的解法), 最后通过dfs爆搜之后，打表照规律... 这两套题目都是估计估计复杂度，然后二分搞搞... 海伦公式 $S= \sqrt{p*(p-a)*(p-b)*(p-c)}$ 其中$p = (a+b+c)/2$， a,b,c为边长
+     - 与小兔子分析 Ctrl-C Ctrl-V..
+
+- 2017/2/22
+     - Transwarp Working Day
+     - 在Hermes的代码结构上考虑很多， 主要纠结点在于: 需不需要使用多线程？ 如果需要在哪些地方需要多线程？ 到底瓶颈在哪里？ 这个需要赶紧写出一个比较Rubbish的代码跑一下Benchmark才知道...
+     - 晚上回去企图写一下tigger18，然而B题误以为是贪心，可是感觉怪怪的不好贪啊。。最后是根据坐标范围，先小小预处理一番再写。。其他题目都是数据范围有限制， 稍微暴力优化优化就水过去了。。
+
+- 2017/2/23
+     - Transwarp Working Day
+     - Hermes进度++, 写完简单版本的logminer -> sync这一端
+    
+- 2017/2/24
+     - Transwarp Working Day
+     - 企图用sh脚本来操作oracle, 感觉比较麻烦， 于是改成用jdbc来更新数据做测试
+     - 跟祥哥请教了一下Hermes的一些关键点
+     - 做了下Astar的D Game， 感觉这种题目不会做的话就不要想太多了。。
+
+- 2017/2/25
+     - Weekenday
+     - search了一下分布式计算的东西
+     - 有打算将重要论文看一遍， 看了部分gfs论文并做了总结
+     - 打了一下BC-Round92, 然而只做出两题， C题是个$O(n^3*m)$的DP题，然而太弱没做出。。
+
+- 2017/2/26
+     - Weekenday
+     - Leetcode 1.5h比赛， all水题, AK, 但是rank160+
+     - 研究完了gfs, 不过依然对gfs中的弱一致性不太理解。(append only & write两种操作都有， append only保持一致性的细节不太懂)
+     - La La Lend, 爱与理想
+
+- 2017/2/27
+     - Transwarp Working Day
+     - Search Hbase的优化方法
+     - Team Meeting, 学习了一下编码的知识(主要是unicode是一种编码的方式，有个代号而已， utf-8与utf-16的区别在于表达形式， uft-8是动态编码的， 不同字符集的表现形式不一致， 可节约空间。 然而JVM中char的编码都是2个Byte，是因为使用了utf-16, 这样定长编码比较好分析， 但是Java中默认使用的还是utf-8, 只是在内存中使用utf-16.
+
+- 2017/2/28
+     - Leetcode Wiggle Sort写了好几个小时。。。！ 最终写的很纠结。。
+     - 就做了几道leetCode, 总结一下bigtable论文。。
+     - GoodBye, Feb!
+
+- 2017/3/1
+     - Transwarp Working Day
+     - Hermes相关， 建立完善的hbase操作机制
+
+- 2017/3/2
+     - 实验室学习? (复习高级数据库 事务ACID的控制， 以及分布式环境考虑相关问题
+     - Play Basketball, 锻炼身体。。
+
+- 2017/3/3
+     - Transwarp Working Day
+     - 写好了Hbase的连接池，相关操作
+     - 周末研究下分布式环境下的HBase操作， 最好初步测试下对接的性能
+
+- 2017/3/4
+     - 躺到中午，去图书馆复习了一下高级数据库的 事务 & 数据恢复部分内容， 然后下午3点多就去颓废了。。
+     - 晚上回去继续颓废
+ 
+- 2017/3/5
+     - 早上10：45起床打Leetcode，然后就很逗比的瞎交题， 最后rank125...
+     - 下午尝试打hihocoder，可是智商下线，做了一题不了了之， 之后补了一下题目，最后一题容斥没想到。。。
+     - KickStart没有打， 垃圾VPN连不上。。
+     - 继续复习高级数据库
+
+- 2017/3/6

@@ -1,0 +1,20 @@
+- 关于ubuntu下安装oracle11g的一些问题
+     - 至今还没有装好, sqlpuls / as sysdba 报错ORA-12547 TNS lost contact的错误
+     - 安装过程: 从guest@172.16.1.99上scp过来两个oracle11g的安装包part, 需要创建一个oracle用户， oinstall/dba用户组
+               修改大量配置文件, 因为oracle对Debian系统的不支持?所以在ubuntu伪造成redHat系列来骗过安装程序。 同时需要安装大量依赖包，之后进入安装程序。
+               安装过程中, 有fix一些依赖的错误, 但是还是skip了很多error, 后来就报了这个错
+     - 遇到的几个问题
+         - 首先, 一定要新开一个oracle用户
+         - 在oracle用户下运行安装脚本时, 报了一个display的错误， 解决方案为:
+             - su root进入root权限 DISPLAY=:0.0; export DISPLAY 
+             - cd /usr/bin 
+             - ./xhost   #access control enabled, only authorized clients can connect 
+             - ./xhost + #access control disabled, clients can connect from any host 
+             - 然后进入oracle账户, 执行:DISPLAY=:0.0; export DISPLAY 
+    - 参考文件
+       - http://blog.csdn.net/u010286751/article/details/51975741
+       - http://blog.csdn.net/whbing1471/article/details/52087130
+       - http://blog.csdn.net/backtracker/article/details/6624718
+
+- 重新安装了OS, 换成Redhat系列的Centos 7.3, 毕竟oracle对redhat支持比较好
+- 在Centos7.3上Install Oracle11g, 安装过程中，所有的依赖补丁都解决了，版本必须要对应，都是一个一个找的rpm包， 然后使用rpm -ivh来安装， 目前使用正常
