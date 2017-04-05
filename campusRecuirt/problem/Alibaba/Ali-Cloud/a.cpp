@@ -1,3 +1,7 @@
+//给出一个字典， 找出现的字符次数
+// Map暴力搞 O(m*log(m) + n*log(m))
+// Trie也是80Points
+
 #include <cstdio>
 #include <iostream>
 #include <cstring>

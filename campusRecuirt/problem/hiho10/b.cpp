@@ -35,5 +35,4 @@ int getValue(vector<int> gifts, int n) {
 }
 
 int main() {
-	
 }
