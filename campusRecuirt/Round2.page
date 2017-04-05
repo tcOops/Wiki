@@ -19,7 +19,7 @@
 
 
 ## 分布式系统
-- [Paxos相关(从base-paxos -> Multi-paxos](http://www.cnblogs.com/cchust/p/5617989.html)
+- [Base-paxos/Multi-paxos](http://www.cnblogs.com/cchust/p/5617989.html)
 - [Raft相关](http://www.cnblogs.com/cchust/p/5634782.html)
 - [一致性问题](http://www.cnblogs.com/bangerlee/p/5268485.html)
 - [选举/租约/多数派](http://www.cnblogs.com/bangerlee/p/5767845.html)
