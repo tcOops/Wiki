@@ -1,4 +1,5 @@
 //线段树恢复第一弹, 单点更新
+//无trick
 
 #include <cstdio>
 #include <iostream>
