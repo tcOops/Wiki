@@ -37,3 +37,6 @@
 - configure是配置环境生成makefile, 然而之前都是直接写的makefile，指定编译顺序，依赖关系等。 之后执行Make，经历(预编译，预处理，编译，链接几个过程), 之后make-install主要是把make步骤中在内存生成的文件写到文件系统，然后通知os等操作。  当然之后还可能有动态链接
 
 - [关于fork的一个trick](http://coolshell.cn/articles/7965.html) 缓冲区的问题
+
+# Linux相关
+- [进程管理相关的命令](http://blog.csdn.net/zhongweijian/article/details/46468627)
