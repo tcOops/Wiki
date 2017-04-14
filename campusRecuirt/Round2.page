@@ -9,7 +9,13 @@
 ----
 ## Java深入
 - [关于HashMap的深入探究](http://blog.csdn.net/ghsau/article/details/16843543)
-- [I/O复用](http://blog.chinaunix.net/uid-22666248-id-168537.html)
+- 关于io多路复用
+      - 首先明确: 当需要同时处理多个客户端的接入请求时， 需要使用多线程||I/O多路复用技术进行处理。 多线程不说了。。问题在于开销大， 所以有些场合下使用I/O复用来解决这个问题。
+      - [Linux I/O几种模型](http://blog.csdn.net/nk_test/article/details/49256129)
+      - [Java中的I/O多路复用](http://blog.csdn.net/yuxiang1014/article/details/49021871)
+      - [I/O复用](http://blog.chinaunix.net/uid-22666248-id-168537.html)
+      - [知乎关于I/o多路复用](https://www.zhihu.com/question/28594409)
+      - [select/poll/epoll对比](http://www.cnblogs.com/Anker/p/3265058.html)
 
 
 ## C++基础复习
