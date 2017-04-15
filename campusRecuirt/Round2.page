@@ -44,8 +44,11 @@
 
 - [关于fork的一个trick](http://coolshell.cn/articles/7965.html) 缓冲区的问题
 
+- [C++ extern](http://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777431.html)
+
 # Linux相关
 - [进程管理相关的命令](http://blog.csdn.net/zhongweijian/article/details/46468627)
+- [fork](http://blog.csdn.net/jason314/article/details/5640969)
 
 # 计算机网络
 - [TCP/UDP的区别](
