@@ -25,6 +25,8 @@
     - int (*a)(int);//函数指针，指向有一个参数并且返回类型 均为int的函数
     - int (*a[10])(int); //函数指针的数组，指向有一个参数并且返回类型均为int的函数的数组
 
+- [左值与右值](http://blog.csdn.net/renwotao2009/article/details/46335859)
+
 
 ## 操作系统
 - [Inode深入理解](http://www.ruanyifeng.com/blog/2011/12/inode.html)
