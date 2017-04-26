@@ -1,0 +1,60 @@
+- 第一轮简单复习基本结束
+- 第二轮深入复习Start..
+
+- 这一轮target:
+      - Java重要点进行深入复习， 对于关键问题比如Java NIO需要实践
+      - 算法 (编程之美搞完， 带着做做训练指南重要题目， 注意思维训练(严谨性，以及常见套路总结))
+      - 分布式系统相关， 论文进行复习， 比较深入的去调用系统的内部结构， 比如Hbase如何设计rowkey比较好？
+      
+----
+## Java深入
+- [关于HashMap的深入探究](http://blog.csdn.net/ghsau/article/details/16843543)
+- 关于io多路复用
+      - 首先明确: 当需要同时处理多个客户端的接入请求时， 需要使用多线程||I/O多路复用技术进行处理。 多线程不说了。。问题在于开销大， 所以有些场合下使用I/O复用来解决这个问题。
+      - [Linux I/O几种模型](http://blog.csdn.net/nk_test/article/details/49256129)
+      - [Java中的I/O多路复用](http://blog.csdn.net/yuxiang1014/article/details/49021871)
+      - [I/O复用](http://blog.chinaunix.net/uid-22666248-id-168537.html)
+      - [知乎关于I/o多路复用](https://www.zhihu.com/question/28594409)
+      - [select/poll/epoll对比](http://www.cnblogs.com/Anker/p/3265058.html)
+
+
+## C++基础复习
+- [指针]
+    - int *a[10];   //指向int类型的指针数组a[10]
+    - int (*a)[10]; //指向有10个int类型数组的指针a
+    - int (*a)(int);//函数指针，指向有一个参数并且返回类型 均为int的函数
+    - int (*a[10])(int); //函数指针的数组，指向有一个参数并且返回类型均为int的函数的数组
+
+- [左值与右值](http://blog.csdn.net/renwotao2009/article/details/46335859)
+- [右值引用](http://www.cnblogs.com/TianFang/archive/2013/01/26/2878356.html)
+
+
+## 操作系统
+- [Inode深入理解](http://www.ruanyifeng.com/blog/2011/12/inode.html)
+
+
+## 分布式系统
+- [Base-paxos/Multi-paxos](http://www.cnblogs.com/cchust/p/5617989.html)
+- [Raft相关](http://www.cnblogs.com/cchust/p/5634782.html)
+- [一致性问题](http://www.cnblogs.com/bangerlee/p/5268485.html)
+- [选举/租约/多数派](http://www.cnblogs.com/bangerlee/p/5767845.html)
+- [Map-Reduce](http://www.cnblogs.com/sharpxiajun/p/3151395.html)
+
+
+## C++/编译原理/etc
+- [configure/makefile/make/make install流程](http://www.ruanyifeng.com/blog/2014/11/compiler.html)
+- configure是配置环境生成makefile, 然而之前都是直接写的makefile，指定编译顺序，依赖关系等。 之后执行Make，经历(预编译，预处理，编译，链接几个过程), 之后make-install主要是把make步骤中在内存生成的文件写到文件系统，然后通知os等操作。  当然之后还可能有动态链接
+
+- [关于fork的一个trick](http://coolshell.cn/articles/7965.html) 缓冲区的问题
+
+- [C++ extern](http://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777431.html)
+
+# Linux相关
+- [进程管理相关的命令](http://blog.csdn.net/zhongweijian/article/details/46468627)
+- [fork](http://blog.csdn.net/jason314/article/details/5640969)
+
+# 计算机网络
+- [TCP/UDP的区别](
+
+# 数据库相关
+- [聚集索引/非聚集索引](http://www.cnblogs.com/aspnethot/articles/1504082.html)
